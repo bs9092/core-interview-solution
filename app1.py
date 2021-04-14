@@ -49,24 +49,23 @@ def getCityWeather():
       return('Wrong city name: {}'.format(city_name))
   except:
     return('Problem to fetch weather, please try again later')
-  '''  
-  except Exception, e:
-    return('Problem to fetch weather - {}, please try again later'.format(str(e))
-  '''
 
 @app.route("/v1/api/checkCurrentWeather", methods=['GET'])
-def getCurrentWeather():
+ef getCurrentWeather():
   ip_access_token = '0a0c931f2254c5'
   weather_api_key = '7483724b93bde963f7789b0e25b7ab00'
   api_url_ip = 'http://ipinfo.io?token={}'.format(ip_access_token)
-  response = requests.post(api_url_ip, verify=False)
-  data = json.loads(response.text)
-  city_name = data['city']
-  api_url_we = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid={}'.format(city_name, weather_api_key)
-  response = requests.post(api_url_we, verify=False)
-  data = json.loads(response.text)
-  weather = {'city': data['name'], 'country': data['sys']['country'], 'degrees': int(data['main']['temp']-273)}
-  return(json.dumps(weather))
+  try:
+    response = requests.post(api_url_ip, verify=False)
+    data = json.loads(response.text)
+    city_name = data['city']
+    api_url_we = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid={}'.format(city_name, weather_api_key)
+    response = requests.post(api_url_we, verify=False)
+    data = json.loads(response.text)
+    weather = {'city': data['name'], 'country': data['sys']['country'], 'degrees': int(data['main']['temp']-273)}
+    return(json.dumps(weather))
+  except:
+    return('Application error. Please try again later')
 
 if __name__ == "__main__":
   app.run(host='0.0.0.0', port=5000)
