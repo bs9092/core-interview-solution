@@ -51,7 +51,7 @@ def getCityWeather():
     return('Problem to fetch weather, please try again later')
 
 @app.route("/v1/api/checkCurrentWeather", methods=['GET'])
-ef getCurrentWeather():
+def getCurrentWeather():
   ip_access_token = '0a0c931f2254c5'
   weather_api_key = '7483724b93bde963f7789b0e25b7ab00'
   api_url_ip = 'http://ipinfo.io?token={}'.format(ip_access_token)
