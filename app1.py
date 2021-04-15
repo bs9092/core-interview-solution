@@ -34,10 +34,10 @@ def driveStatus():
 @app.route("/v1/api/checkCityWeather", methods=['GET'])
 def getCityWeather():
 
-  if 'city' in request.args:
-      city_name = request.args['city']
+  if 'city' in request.args and len(request.args['city'])>0:
+    city_name = request.args['city']
   else:
-    return('{"status": "error", "message": "missing city named"}')
+    return('{"status": "error", "message": "missing city name"}')
 
   weather_api_key = '7483724b93bde963f7789b0e25b7ab00'
   api_url_we = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid={}'.format(city_name, weather_api_key)
